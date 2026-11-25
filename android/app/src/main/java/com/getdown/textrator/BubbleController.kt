@@ -21,12 +21,16 @@ import kotlin.math.abs
 import kotlin.math.hypot
 
 /**
- * The floating, see-through bubble. Hosted by the accessibility service as an
- * accessibility overlay, so it needs no separate "draw over other apps" permission
- * and survives as long as the service is on.
+ * The floating, see-through bubble. In the Play Store build it is an accessibility overlay
+ * (no extra permission); in the Go build it is an app overlay ("display over other apps").
  * Tap = capture, drag = move (snaps to edge), long-press = open the app.
  */
-class BubbleController(private val ctx: Context, private val wm: WindowManager, private val onTap: () -> Unit) {
+class BubbleController(
+    private val ctx: Context,
+    private val wm: WindowManager,
+    private val windowType: Int,
+    private val onTap: () -> Unit,
+) {
 
     private var root: FrameLayout? = null
     private var icon: ImageView? = null
@@ -75,7 +79,7 @@ class BubbleController(private val ctx: Context, private val wm: WindowManager, 
         val screen = Screen.bounds(ctx)
         val lp = WindowManager.LayoutParams(
             box, box,
-            WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY,
+            windowType,
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or
                 WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,

@@ -27,6 +27,24 @@ android {
         buildConfigField("String", "AUTH_MODE", "\"${cfg("AUTH_MODE", "optional")}\"")
     }
 
+    // Two builds of the same app:
+    //  full = Accessibility version for Google Play (exact text + OCR, no consent popup).
+    //  go   = website APK without Accessibility, so Play Protect doesn't block the sideload in India
+    //         (overlay bubble + screen capture + OCR).
+    flavorDimensions += "dist"
+    productFlavors {
+        create("full") {
+            dimension = "dist"
+            buildConfigField("String", "DIST", "\"full\"")
+        }
+        create("go") {
+            dimension = "dist"
+            applicationIdSuffix = ".go"
+            versionNameSuffix = "-go"
+            buildConfigField("String", "DIST", "\"go\"")
+        }
+    }
+
     signingConfigs {
         // A fixed key means every new APK installs over the old one (no "app not installed" on update).
         // For Play Store, set KEYSTORE_FILE / KEYSTORE_PASSWORD / KEY_ALIAS / KEY_PASSWORD to your private key.

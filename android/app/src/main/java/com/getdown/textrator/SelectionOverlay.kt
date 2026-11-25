@@ -35,6 +35,7 @@ import kotlin.math.min
 class SelectionOverlay(
     private val ctx: Context,
     private val wm: WindowManager,
+    private val windowType: Int,
     private val blocks: List<TextBlock>,
     private val sourcePkg: String,
     private val method: String,
@@ -92,7 +93,7 @@ class SelectionOverlay(
 
         val lp = WindowManager.LayoutParams(
             WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY,
+            windowType,
             WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             PixelFormat.TRANSLUCENT
         ).apply {

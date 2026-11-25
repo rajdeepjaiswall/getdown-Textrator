@@ -54,20 +54,24 @@ jobs:
           echo "KEY_ALIAS=${{ secrets.KEY_ALIAS }}" >> "$GITHUB_ENV"
           echo "KEY_PASSWORD=${{ secrets.KEY_PASSWORD }}" >> "$GITHUB_ENV"
 
-      - name: Build release APK
+      - name: Build APKs (Go + Play) and Play Store bundle
         working-directory: android
-        run: gradle assembleRelease --no-daemon --stacktrace
+        run: gradle assembleGoRelease assembleFullRelease bundleFullRelease --no-daemon --stacktrace
 
-      - name: Rename APK
+      - name: Collect outputs
         run: |
           mkdir -p out
-          cp android/app/build/outputs/apk/release/app-release.apk out/GetDownTextrator.apk
+          # Website download: Go build (no Accessibility → not blocked by Play Protect).
+          cp android/app/build/outputs/apk/go/release/app-go-release.apk out/GetDownTextrator.apk
+          # Play Store build, for ADB testing and upload.
+          cp android/app/build/outputs/apk/full/release/app-full-release.apk out/GetDownTextrator-PlayStore.apk
+          cp android/app/build/outputs/bundle/fullRelease/app-full-release.aab out/GetDownTextrator-PlayStore.aab
           ls -la out
 
       - uses: actions/upload-artifact@v4
         with:
           name: GetDownTextrator-${{ env.VERSION_NAME }}
-          path: out/GetDownTextrator.apk
+          path: out/*
 
       - name: Publish GitHub Release (latest)
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
@@ -76,8 +80,13 @@ jobs:
           tag_name: v${{ env.VERSION_NAME }}
           name: Textrator ${{ env.VERSION_NAME }}
           make_latest: true
-          files: out/GetDownTextrator.apk
+          files: |
+            out/GetDownTextrator.apk
+            out/GetDownTextrator-PlayStore.apk
+            out/GetDownTextrator-PlayStore.aab
           body: |
             GETDOWN Textrator ${{ env.VERSION_NAME }}
-            Download **GetDownTextrator.apk** below and install it on your Android phone.
+            - **GetDownTextrator.apk**: install this on any Android phone (website download).
+            - **GetDownTextrator-PlayStore.aab**: upload to Google Play Console.
+            - **GetDownTextrator-PlayStore.apk**: Play version for testing via ADB. Play Protect blocks it when installed from a browser or file manager.
             Commit: ${{ github.sha }}

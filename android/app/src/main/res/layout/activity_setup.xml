@@ -16,7 +16,7 @@
             android:orientation="vertical" android:background="@drawable/card_bg" android:padding="16dp">
             <TextView android:id="@+id/s1Title" android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:text="1. How Textrator uses your screen" android:textStyle="bold" android:textColor="@color/ink" android:textSize="15sp"/>
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp"
+            <TextView android:id="@+id/disclosure" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp"
                 android:textSize="13sp" android:textColor="@color/muted"
                 android:text="Textrator uses Android's Accessibility Service to show its floating bubble and, only when you tap the bubble, to read the text on your screen and take a screenshot so it can read text inside images.\n\n• Reading happens on your phone. Screen content and screenshots are never uploaded.\n• Screenshots are deleted right after the text is read.\n• Text you copy is saved only in this app's history, which you can delete at any time.\n• We only send anonymous usage counts (how many copies, from which app) to improve the service.\n• It never reads passwords, and it doesn't control your phone or tap anything for you."/>
             <CheckBox android:id="@+id/consent" android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             android:orientation="vertical" android:background="@drawable/card_bg" android:padding="16dp">
             <TextView android:id="@+id/s2Title" android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:text="2. Turn on Textrator in Accessibility" android:textStyle="bold" android:textColor="@color/ink" android:textSize="15sp"/>
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp"
+            <TextView android:id="@+id/s2Text" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp"
                 android:textSize="13sp" android:textColor="@color/muted"
                 android:text="Open Accessibility, then Installed apps (or Downloaded apps), then GETDOWN Textrator. Switch it on and tap Allow."/>
             <Button android:id="@+id/s2Btn" style="@style/Widget.Material3.Button"

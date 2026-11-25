@@ -20,6 +20,12 @@ class SettingsActivity : AppCompatActivity() {
         bind(R.id.swOcr, Prefs.useOcr) { Prefs.useOcr = it }
         bind(R.id.swHistory, Prefs.saveHistory) { Prefs.saveHistory = it }
         bind(R.id.swHaptics, Prefs.haptics) { Prefs.haptics = it }
+        if (!Engine.USES_ACCESSIBILITY) {
+            // Go build: always reads by OCR, bubble on/off lives on the home screen.
+            findViewById<android.view.View>(R.id.swOcr).visibility = android.view.View.GONE
+            findViewById<android.view.View>(R.id.swSmart).visibility = android.view.View.GONE
+            findViewById<android.view.View>(R.id.swBubble).visibility = android.view.View.GONE
+        }
 
         val sizeLabel = findViewById<TextView>(R.id.sizeLabel)
         val size = findViewById<SeekBar>(R.id.size)
@@ -77,7 +83,7 @@ class SettingsActivity : AppCompatActivity() {
         sw.setOnCheckedChangeListener { _, c -> onChange(c) }
     }
 
-    private fun applyBubble() { TractorService.instance?.refreshBubble() }
+    private fun applyBubble() { Engine.refreshBubble() }
 
     private fun seek(onMove: (Int) -> Unit, onDone: (Int) -> Unit) = object : SeekBar.OnSeekBarChangeListener {
         override fun onProgressChanged(s: SeekBar, p: Int, fromUser: Boolean) { onMove(p) }

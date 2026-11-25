@@ -77,7 +77,7 @@ object OemHelper {
     }
 
     fun openAccessibility(ctx: Context) {
-        val component = ComponentName(ctx, TractorService::class.java).flattenToString()
+        val component = ComponentName(ctx.packageName, "com.getdown.textrator.TractorService").flattenToString()
         // Try to jump straight to our service's page, fall back to the list.
         val direct = Intent("android.settings.ACCESSIBILITY_DETAILS_SETTINGS")
             .putExtra(Intent.EXTRA_COMPONENT_NAME, component)

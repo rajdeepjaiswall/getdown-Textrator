@@ -60,9 +60,8 @@ class MainActivity : AppCompatActivity() {
         }
         findViewById<MaterialSwitch>(R.id.bubbleSwitch).setOnCheckedChangeListener { _, on ->
             if (suppressSwitch) return@setOnCheckedChangeListener
-            Prefs.bubbleEnabled = on
-            TractorService.instance?.refreshBubble()
-            refreshStatus()
+            Engine.setBubble(this, on)
+            window.decorView.postDelayed({ refreshStatus() }, 400)
         }
     }
 
@@ -86,24 +85,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refreshStatus() {
-        val enabled = TractorService.isEnabled(this)
+        val enabled = Engine.isReady(this)
         val title = findViewById<TextView>(R.id.statusTitle)
         val text = findViewById<TextView>(R.id.statusText)
         val fix = findViewById<Button>(R.id.fixSetup)
         val sw = findViewById<MaterialSwitch>(R.id.bubbleSwitch)
         suppressSwitch = true
-        sw.isChecked = Prefs.bubbleEnabled
+        sw.isChecked = Engine.isBubbleOn()
         sw.isEnabled = enabled
         suppressSwitch = false
         when {
             !enabled -> {
-                title.text = "Textrator is off"
-                text.text = "Turn on the accessibility service to get the floating bubble."
+                title.text = "Textrator needs one permission"
+                text.text = if (Engine.USES_ACCESSIBILITY) "Turn on the accessibility service to get the floating bubble."
+                else "Allow “Display over other apps” so the bubble can float over your apps."
                 fix.visibility = View.VISIBLE
             }
-            !Prefs.bubbleEnabled -> {
-                title.text = "Bubble is hidden"
-                text.text = "Switch it on, or use the Textrator tile in Quick Settings."
+            !Engine.isBubbleOn() -> {
+                title.text = "Bubble is off"
+                text.text = if (Engine.USES_ACCESSIBILITY) "Switch it on, or use the Textrator tile in Quick Settings."
+                else "Switch it on. Android will ask to allow screen capture. Choose Entire screen, then Start."
                 fix.visibility = View.GONE
             }
             else -> {

@@ -4,4 +4,5 @@
     <string name="service_label">GETDOWN Textrator</string>
     <string name="service_description">Shows the Textrator bubble over your apps. When you tap it, it reads the text on your screen (and takes a screenshot to read text inside images) so you can select and copy it. Everything stays on your phone. Nothing is read until you tap the bubble.</string>
     <string name="tile_label">Textrator</string>
+    <string name="disclosure_go">GETDOWN Textrator shows a floating bubble over your apps (\"display over other apps\") and uses Android screen capture while the bubble is on. Only when you tap the bubble does it read the latest screen image to find text.\n\n• Reading happens on your phone. Screen images are never saved or uploaded.\n• Screen images are discarded right after the text is read.\n• Text you copy is saved only in this app\'s history, which you can delete at any time.\n• We only send anonymous usage counts (how many copies) to improve the service.\n• Stop the bubble any time from the app or the notification.</string>
 </resources>
