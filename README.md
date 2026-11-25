@@ -11,6 +11,16 @@ Select what you need, tap **Copy**, and it's saved to your in-app history.
 | Website + admin | `web/` | Landing page, APK download, privacy policy, admin dashboard (Vercel) |
 | CI | `.github/workflows/` | Builds the APK on every push and publishes it as the latest GitHub Release |
 
+## Two builds
+
+| Build | File | Install from | How it reads the screen |
+|---|---|---|---|
+| **Go** (`go` flavour) | `GetDownTextrator.apk` | Website or any APK share | Overlay bubble + screen capture (approve once per session) + OCR |
+| **Play Store** (`full` flavour) | `GetDownTextrator-PlayStore.aab` | Google Play | Accessibility: exact text + OCR, no capture prompt |
+
+Why two: in India, Google Play Protect blocks **sideloaded** apps that use Accessibility (its "enhanced fraud protection").
+Apps installed from Play are fine. See `docs/PLAY_STORE.md` for the submission pack.
+
 ## How it works
 
 1. **Bubble.** `TractorService` (an AccessibilityService) draws the bubble as an *accessibility overlay*,
