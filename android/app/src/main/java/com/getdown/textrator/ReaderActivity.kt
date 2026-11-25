@@ -1,4 +1,4 @@
-package com.getdown.texttractor
+package com.getdown.textrator
 
 import android.content.Intent
 import android.net.Uri
@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 
 /**
  * Shows text with real Android selection handles so any exact word or line can be copied.
- * Also receives: photos shared from other apps (OCR), and text from the "Text Tractor" option in
+ * Also receives: photos shared from other apps (OCR), and text from the "Textrator" option in
  * other apps' text-selection menu, which gets saved to history (the "inbox" behaviour).
  */
 class ReaderActivity : AppCompatActivity() {
@@ -45,7 +45,7 @@ class ReaderActivity : AppCompatActivity() {
             processed != null -> {
                 edit.setText(processed); method = "share"
                 ClipHelper.save(this, processed, source, method)
-                toast("Saved to Text Tractor")
+                toast("Saved to Textrator")
             }
             image != null -> {
                 title.text = "Reading photo…"
@@ -66,7 +66,7 @@ class ReaderActivity : AppCompatActivity() {
             shared != null -> {
                 edit.setText(shared); method = "share"
                 ClipHelper.save(this, shared, source, method)
-                toast("Saved to Text Tractor")
+                toast("Saved to Textrator")
             }
         }
 

@@ -1,4 +1,4 @@
-package com.getdown.texttractor
+package com.getdown.textrator
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -14,7 +14,7 @@ object ClipHelper {
         val clean = text.trim()
         if (clean.isEmpty()) return
         val cm = ctx.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        cm.setPrimaryClip(ClipData.newPlainText("Text Tractor", clean))
+        cm.setPrimaryClip(ClipData.newPlainText("Textrator", clean))
         save(ctx, clean, source, method)
         Backend.logEvent("copy", clean.length, source, method)
         // Android 13+ shows its own "Copied" confirmation; avoid a double toast.

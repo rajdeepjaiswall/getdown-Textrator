@@ -1,4 +1,4 @@
-package com.getdown.texttractor
+package com.getdown.textrator
 
 import android.content.Intent
 import android.os.Bundle

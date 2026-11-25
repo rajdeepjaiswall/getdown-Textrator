@@ -1,4 +1,4 @@
-package com.getdown.texttractor
+package com.getdown.textrator
 
 import android.content.Context
 import android.graphics.Point

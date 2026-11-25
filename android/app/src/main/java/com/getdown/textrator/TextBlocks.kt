@@ -1,4 +1,4 @@
-package com.getdown.texttractor
+package com.getdown.textrator
 
 import android.accessibilityservice.AccessibilityService
 import android.graphics.Rect

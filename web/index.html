@@ -2,30 +2,31 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Get Down Text Tractor: copy any text from any screen</title>
+<title>GETDOWN Textrator: copy any text from any screen</title>
 <meta name="description" content="A floating bubble for Android. Tap it on any app, select the text you see (even text inside images), and copy it. Works offline, on your phone.">
-<link rel="icon" href="/logo.svg"><link rel="stylesheet" href="/styles.css">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="stylesheet" href="/styles.css">
 <style>
 .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:36px 0 56px}
-.hero h1{font-size:clamp(32px,5vw,52px);line-height:1.05;margin:0 0 14px;color:var(--leaf-dark);letter-spacing:-.02em}
+.hero h1{font-size:clamp(32px,5vw,52px);line-height:1.05;margin:0 0 14px;color:var(--ink);letter-spacing:-.02em;font-weight:900}
+.hero .bar{height:12px;width:160px;background:var(--leaf);margin:0 0 18px}
 .hero h1 span{color:var(--brown)}
 .hero p.lead{font-size:18px;color:var(--muted);margin:0 0 24px;max-width:520px}
 .cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 .phone{justify-self:center;width:280px;height:560px;border-radius:40px;background:#fff;border:10px solid var(--ink);position:relative;overflow:hidden;box-shadow:0 30px 60px -30px rgba(43,38,34,.45)}
 .phone .line{height:10px;border-radius:6px;background:#EDE7E0;margin:10px 18px}
-.phone .box{position:absolute;border-radius:6px;border:1.5px solid var(--leaf);background:rgba(62,142,65,.14)}
-.phone .box.sel{background:rgba(62,142,65,.4);border-color:var(--leaf-dark);border-width:2px}
+.phone .box{position:absolute;border-radius:6px;border:1.5px solid var(--leaf-deep);background:rgba(165,228,32,.2)}
+.phone .box.sel{background:rgba(165,228,32,.5);border-color:var(--ink);border-width:2px}
 .phone .img{margin:14px 18px;height:120px;border-radius:12px;background:linear-gradient(135deg,#C8B6A6,#8D6E63);position:relative}
 .phone .img b{position:absolute;left:16px;top:44px;color:#fff;font-size:20px;letter-spacing:.02em}
-.phone .bubble{position:absolute;right:-6px;top:200px;width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.9);border:2px solid var(--leaf);display:grid;place-items:center;box-shadow:0 6px 16px rgba(0,0,0,.15);animation:pulse 2.4s ease-in-out infinite}
-.phone .bubble img{width:34px}
-.phone .bar{position:absolute;left:16px;right:16px;bottom:22px;background:#fff;border-radius:24px;box-shadow:0 8px 22px rgba(0,0,0,.18);display:flex;justify-content:space-around;padding:8px;font-size:12px;font-weight:700;color:var(--brown-dark)}
-.phone .bar span:last-child{background:var(--leaf);color:#fff;border-radius:16px;padding:4px 10px}
+.phone .bubble{position:absolute;right:-6px;top:200px;width:58px;height:58px;border-radius:14px;display:grid;place-items:center;box-shadow:0 6px 16px rgba(0,0,0,.15);animation:pulse 2.4s ease-in-out infinite}
+.phone .bubble img{width:58px;height:58px;border-radius:13px}
+.phone .bar{height:auto;width:auto;margin:0;position:absolute;left:16px;right:16px;bottom:22px;background:#fff;border-radius:24px;box-shadow:0 8px 22px rgba(0,0,0,.18);display:flex;justify-content:space-around;padding:8px;font-size:12px;font-weight:700;color:var(--brown-dark)}
+.phone .bar span:last-child{background:var(--leaf);color:var(--ink);border-radius:16px;padding:4px 10px}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.feature h3{margin:6px 0;color:var(--leaf-dark);font-size:17px}
+.feature h3{margin:6px 0;color:var(--ink);font-size:17px}
 .feature p{margin:0;color:var(--muted);font-size:14px}
-.icon{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--leaf-light);color:var(--leaf-dark);font-weight:800}
+.icon{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--leaf);color:var(--ink);font-weight:900}
 section{padding:28px 0}
 h2{font-size:28px;color:var(--ink);margin:0 0 18px;letter-spacing:-.01em}
 ol.steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:12px}
@@ -38,16 +39,17 @@ footer{padding:36px 0 48px;color:var(--muted);font-size:13px;border-top:1px soli
 <body>
 <div class="wrap">
   <nav class="nav">
-    <img src="/logo.svg" alt="">
-    <div class="brand">Get Down Text Tractor<small>by Get Down Foundation</small></div>
+    <img src="/logo.png" alt="">
+    <div class="brand">GETDOWN Textrator<small>by Getdown Foundation</small></div>
     <div class="spacer"></div>
     <a class="btn btn-ghost" href="/admin/">Admin</a>
   </nav>
 
   <div class="hero">
     <div>
+      <div class="bar"></div>
       <h1>Copy <span>any</span> text<br>from any screen.</h1>
-      <p class="lead">A see-through floating leaf for Android. Tap it on any app, and every piece of text lights up, even text inside photos, posters and videos. Pick what you need, tap Copy, done.</p>
+      <p class="lead">A see-through floating bubble for Android. Tap it on any app, and every piece of text lights up, even text inside photos, posters and videos. Pick what you need, tap Copy, done.</p>
       <div class="cta">
         <a class="btn btn-primary" id="download" href="#">⬇ Download for Android</a>
         <span class="muted" style="font-size:13px">Free · Android 7+ · Hindi &amp; English</span>
@@ -62,16 +64,16 @@ footer{padding:36px 0 48px;color:var(--muted);font-size:13px;border-top:1px soli
       <div class="box" style="left:14px;top:40px;width:150px;height:18px"></div>
       <div class="box sel" style="left:14px;top:60px;width:230px;height:18px"></div>
       <div class="box" style="left:28px;top:150px;width:150px;height:30px"></div>
-      <div class="bubble"><img src="/logo.svg" alt=""></div>
+      <div class="bubble"><img src="/logo.png" alt=""></div>
       <div class="bar"><span>Select all</span><span>Edit</span><span>Share</span><span>Copy (1)</span></div>
     </div>
   </div>
 
   <section>
     <div class="grid3">
-      <div class="card feature"><div class="icon">1</div><h3>Tap the leaf</h3><p>The bubble floats over every app. It's see-through, and it grows a little when a screen is full of text.</p></div>
+      <div class="card feature"><div class="icon">1</div><h3>Tap the bubble</h3><p>The bubble floats over every app. It's see-through, and it grows a little when a screen is full of text.</p></div>
       <div class="card feature"><div class="icon">2</div><h3>Pick the text</h3><p>Tap a box, drag across many, or long-press to choose exact words. Works where normal copy doesn't: Instagram, YouTube, PDFs, photos.</p></div>
-      <div class="card feature"><div class="icon">3</div><h3>It's saved for you</h3><p>Everything you copy goes to your Text Tractor history. Search it, pin it, copy it again later.</p></div>
+      <div class="card feature"><div class="icon">3</div><h3>It's saved for you</h3><p>Everything you copy goes to your Textrator history. Search it, pin it, copy it again later.</p></div>
     </div>
   </section>
 
@@ -79,8 +81,8 @@ footer{padding:36px 0 48px;color:var(--muted);font-size:13px;border-top:1px soli
     <h2>Install in 2 minutes</h2>
     <ol class="steps">
       <li><b>Download the APK</b> above and open it. If Android asks, allow installing from your browser or Files app.</li>
-      <li><b>Open Text Tractor</b> and read the short note on how it uses your screen. Tick <i>I agree</i>.</li>
-      <li><b>Turn it on in Accessibility:</b> Settings, then Accessibility, then Installed or Downloaded apps, then <i>Get Down Text Tractor</i>, then On.</li>
+      <li><b>Open Textrator</b> and read the short note on how it uses your screen. Tick <i>I agree</i>.</li>
+      <li><b>Turn it on in Accessibility:</b> Settings, then Accessibility, then Installed or Downloaded apps, then <i>GETDOWN Textrator</i>, then On.</li>
       <li><b>Switch greyed out?</b> On Android 13+ open <i>App info</i>, tap <i>⋮</i> (top right), then <i>Allow restricted settings</i>, and try again. The app walks you through this.</li>
       <li><b>Xiaomi, Oppo, Vivo, Realme:</b> allow <i>Autostart</i> and set battery to <i>No restrictions</i> so the bubble doesn't vanish.</li>
     </ol>
@@ -93,7 +95,7 @@ footer{padding:36px 0 48px;color:var(--muted);font-size:13px;border-top:1px soli
     </div>
   </section>
 
-  <footer>© <span id="y"></span> Get Down Foundation, Prayagraj · <a href="https://getdownfoundation.in">getdownfoundation.in</a> · <a href="/privacy.html">Privacy</a></footer>
+  <footer><img src="/getdown-foundation-logo.png" alt="Getdown Foundation" width="96" height="96" style="display:block;margin-bottom:8px">© <span id="y"></span> Getdown Foundation, Prayagraj · <a href="https://getdownfoundation.in">getdownfoundation.in</a> · <a href="/privacy.html">Privacy</a></footer>
 </div>
 <script src="/config.js"></script>
 <script>

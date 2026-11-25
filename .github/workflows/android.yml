@@ -59,23 +59,23 @@ jobs:
       - name: Rename APK
         run: |
           mkdir -p out
-          cp android/app/build/outputs/apk/release/app-release.apk out/GetDownTextTractor.apk
+          cp android/app/build/outputs/apk/release/app-release.apk out/GetDownTextrator.apk
           ls -la out
 
       - uses: actions/upload-artifact@v4
         with:
-          name: GetDownTextTractor-${{ env.VERSION_NAME }}
-          path: out/GetDownTextTractor.apk
+          name: GetDownTextrator-${{ env.VERSION_NAME }}
+          path: out/GetDownTextrator.apk
 
       - name: Publish GitHub Release (latest)
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ env.VERSION_NAME }}
-          name: Text Tractor ${{ env.VERSION_NAME }}
+          name: Textrator ${{ env.VERSION_NAME }}
           make_latest: true
-          files: out/GetDownTextTractor.apk
+          files: out/GetDownTextrator.apk
           body: |
-            Get Down Text Tractor ${{ env.VERSION_NAME }}
-            Download **GetDownTextTractor.apk** below and install it on your Android phone.
+            GETDOWN Textrator ${{ env.VERSION_NAME }}
+            Download **GetDownTextrator.apk** below and install it on your Android phone.
             Commit: ${{ github.sha }}

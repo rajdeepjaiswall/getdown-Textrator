@@ -8,4 +8,4 @@
     android:notificationTimeout="300"
     android:description="@string/service_description"
     android:summary="@string/service_description"
-    android:settingsActivity="com.getdown.texttractor.MainActivity" />
+    android:settingsActivity="com.getdown.textrator.MainActivity" />

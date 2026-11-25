@@ -1,4 +1,4 @@
-package com.getdown.texttractor
+package com.getdown.textrator
 
 import android.content.Intent
 import android.os.Bundle
@@ -97,23 +97,23 @@ class MainActivity : AppCompatActivity() {
         suppressSwitch = false
         when {
             !enabled -> {
-                title.text = "Text Tractor is off"
+                title.text = "Textrator is off"
                 text.text = "Turn on the accessibility service to get the floating bubble."
                 fix.visibility = View.VISIBLE
             }
             !Prefs.bubbleEnabled -> {
                 title.text = "Bubble is hidden"
-                text.text = "Switch it on, or use the Text Tractor tile in Quick Settings."
+                text.text = "Switch it on, or use the Textrator tile in Quick Settings."
                 fix.visibility = View.GONE
             }
             else -> {
                 title.text = "Bubble is on"
-                text.text = "Tap the floating leaf on any screen to select and copy its text. Drag it to move it. Long-press it to open this app."
+                text.text = "Tap the floating bubble on any screen to select and copy its text. Drag it to move it. Long-press it to open this app."
                 fix.visibility = View.GONE
             }
         }
         findViewById<TextView>(R.id.account).text =
-            if (Backend.isLoggedIn) Prefs.userEmail else "Guest · by Get Down"
+            if (Backend.isLoggedIn) Prefs.userEmail else "Guest · by Getdown Foundation"
     }
 
     private fun reload() {

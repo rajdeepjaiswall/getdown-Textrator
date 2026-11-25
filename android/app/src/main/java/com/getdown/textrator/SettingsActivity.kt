@@ -1,4 +1,4 @@
-package com.getdown.texttractor
+package com.getdown.textrator
 
 import android.content.Intent
 import android.os.Bundle
@@ -41,12 +41,12 @@ class SettingsActivity : AppCompatActivity() {
         findViewById<Button>(R.id.clear).setOnClickListener {
             MaterialAlertDialogBuilder(this)
                 .setTitle("Clear history?")
-                .setMessage("This deletes everything you've copied with Text Tractor on this phone. You can't undo this.")
+                .setMessage("This deletes everything you've copied with Textrator on this phone. You can't undo this.")
                 .setPositiveButton("Clear") { _, _ -> HistoryDb.get(this).clear() }
                 .setNegativeButton("Cancel", null).show()
         }
         findViewById<TextView>(R.id.version).text =
-            "Get Down Text Tractor v${BuildConfig.VERSION_NAME}\nby Get Down Foundation · getdownfoundation.in"
+            "GETDOWN Textrator v${BuildConfig.VERSION_NAME}\nby Getdown Foundation · getdownfoundation.in"
     }
 
     override fun onResume() {

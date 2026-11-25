@@ -2,5 +2,5 @@
 window.TT_CONFIG = {
   supabaseUrl: "",
   supabaseAnonKey: "",
-  apkUrl: "https://github.com/rajdeepjaiswall/getdown-text-tractor/releases/latest/download/GetDownTextTractor.apk"
+  apkUrl: "https://github.com/rajdeepjaiswall/getdown-Textrator/releases/latest/download/GetDownTextrator.apk"
 };

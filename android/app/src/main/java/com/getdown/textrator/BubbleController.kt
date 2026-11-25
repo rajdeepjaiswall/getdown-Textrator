@@ -1,4 +1,4 @@
-package com.getdown.texttractor
+package com.getdown.textrator
 
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
@@ -49,12 +49,16 @@ class BubbleController(private val ctx: Context, private val wm: WindowManager, 
 
         val frame = FrameLayout(ctx)
         val iv = ImageView(ctx).apply {
-            setImageResource(R.drawable.ic_logo)
-            setBackgroundResource(R.drawable.bubble_bg)
-            val ip = (size * 0.16f).toInt()
-            setPadding(ip, ip, ip, ip)
+            setImageResource(R.drawable.logo)
+            scaleType = ImageView.ScaleType.FIT_CENTER
+            // Rounded-square shadow that matches the logo's shape.
+            outlineProvider = object : android.view.ViewOutlineProvider() {
+                override fun getOutline(view: View, outline: android.graphics.Outline) {
+                    outline.setRoundRect(0, 0, view.width, view.height, view.width * 0.18f)
+                }
+            }
             elevation = Screen.dp(ctx, 4f).toFloat()
-            contentDescription = "Text Tractor: tap to copy text from the screen"
+            contentDescription = "GETDOWN Textrator: tap to copy text from the screen"
         }
         frame.addView(iv, FrameLayout.LayoutParams(size, size, Gravity.CENTER))
         val b = View(ctx).apply {

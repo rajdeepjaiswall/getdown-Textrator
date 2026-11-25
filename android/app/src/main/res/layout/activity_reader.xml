@@ -4,11 +4,11 @@
     android:orientation="vertical" android:padding="18dp" android:background="@color/white">
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
         android:orientation="horizontal" android:gravity="center_vertical">
-        <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@drawable/ic_logo"
+        <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@drawable/logo"
             android:contentDescription="@string/app_name"/>
         <TextView android:id="@+id/title" android:layout_width="0dp" android:layout_weight="1"
             android:layout_height="wrap_content" android:paddingStart="10dp"
-            android:text="Extracted text" android:textSize="17sp" android:textStyle="bold" android:textColor="@color/leaf_dark"/>
+            android:text="Extracted text" android:textSize="17sp" android:textStyle="bold" android:textColor="@color/ink"/>
     </LinearLayout>
     <TextView android:id="@+id/hint" android:layout_width="match_parent" android:layout_height="wrap_content"
         android:layout_marginTop="4dp" android:textSize="12sp" android:textColor="@color/muted"

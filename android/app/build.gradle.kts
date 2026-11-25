@@ -10,11 +10,11 @@ fun cfg(name: String, default: String = ""): String =
         ?: default
 
 android {
-    namespace = "com.getdown.texttractor"
+    namespace = "com.getdown.textrator"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.getdown.texttractor"
+        applicationId = "com.getdown.textrator"
         minSdk = 24
         targetSdk = 35
         versionCode = cfg("VERSION_CODE", "1").toInt()

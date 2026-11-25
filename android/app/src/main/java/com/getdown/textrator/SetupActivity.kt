@@ -1,4 +1,4 @@
-package com.getdown.texttractor
+package com.getdown.textrator
 
 import android.content.Intent
 import android.os.Build
@@ -25,12 +25,12 @@ class SetupActivity : AppCompatActivity() {
         findViewById<Button>(R.id.s2Btn).setOnClickListener {
             if (!Prefs.consentGiven) { toast("Please read and accept step 1 first."); return@setOnClickListener }
             OemHelper.openAccessibility(this)
-            toast("Find “Get Down Text Tractor” and switch it on")
+            toast("Find “GETDOWN Textrator” and switch it on")
         }
         findViewById<Button>(R.id.restrictedBtn).setOnClickListener { OemHelper.openAppInfo(this) }
         findViewById<Button>(R.id.s3Btn).setOnClickListener { OemHelper.requestIgnoreBattery(this) }
         findViewById<Button>(R.id.s4Btn).setOnClickListener {
-            if (!OemHelper.openAutostart(this)) toast("Open Battery or Autostart and allow Get Down Text Tractor")
+            if (!OemHelper.openAutostart(this)) toast("Open Battery or Autostart and allow GETDOWN Textrator")
         }
         findViewById<Button>(R.id.done).setOnClickListener {
             if (!Prefs.consentGiven) { toast("Please accept step 1 first."); return@setOnClickListener }
@@ -51,9 +51,9 @@ class SetupActivity : AppCompatActivity() {
     }
 
     private fun refresh() {
-        mark(R.id.s1Title, "1. How Text Tractor uses your screen", Prefs.consentGiven)
+        mark(R.id.s1Title, "1. How Textrator uses your screen", Prefs.consentGiven)
         val a11y = TractorService.isEnabled(this)
-        mark(R.id.s2Title, "2. Turn on Text Tractor in Accessibility", a11y)
+        mark(R.id.s2Title, "2. Turn on Textrator in Accessibility", a11y)
         mark(R.id.s3Title, "3. Keep the bubble alive", OemHelper.isIgnoringBattery(this))
         findViewById<Button>(R.id.s2Btn).text = if (a11y) "Turned on ✓" else "Open Accessibility settings"
         findViewById<Button>(R.id.s3Btn).text = if (OemHelper.isIgnoringBattery(this)) "Allowed ✓" else "Allow running in background"

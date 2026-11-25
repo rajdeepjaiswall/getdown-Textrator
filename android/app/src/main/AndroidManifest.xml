@@ -22,7 +22,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TextTractor"
+        android:theme="@style/Theme.Textrator"
         tools:targetApi="35">
 
         <activity
@@ -44,19 +44,19 @@
             android:name=".ReaderActivity"
             android:exported="true"
             android:excludeFromRecents="true"
-            android:taskAffinity="com.getdown.texttractor.reader"
-            android:theme="@style/Theme.TextTractor.Dialog">
+            android:taskAffinity="com.getdown.textrator.reader"
+            android:theme="@style/Theme.Textrator.Dialog">
             <intent-filter android:label="Extract text">
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="image/*" />
             </intent-filter>
-            <intent-filter android:label="Save to Text Tractor">
+            <intent-filter android:label="Save to Textrator">
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
             </intent-filter>
-            <intent-filter android:label="Text Tractor">
+            <intent-filter android:label="Textrator">
                 <action android:name="android.intent.action.PROCESS_TEXT" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
@@ -79,7 +79,7 @@
         <service
             android:name=".CaptureTileService"
             android:exported="true"
-            android:icon="@drawable/ic_logo"
+            android:icon="@drawable/ic_tile"
             android:label="@string/tile_label"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>

@@ -1,6 +1,6 @@
-# Get Down Text Tractor
+# GETDOWN Textrator
 
-Copy any text from any screen on Android. A see-through floating leaf sits over every app.
+Copy any text from any screen on Android. A see-through floating bubble sits over every app.
 Tap it and every piece of text on screen is outlined, including text inside images.
 Select what you need, tap **Copy**, and it's saved to your in-app history.
 
@@ -63,10 +63,10 @@ If the app is built without Supabase keys, it skips login completely and works o
    Optional Play Store key: `KEYSTORE_BASE64`, `KEYSTORE_PASSWORD`, `KEY_ALIAS`, `KEY_PASSWORD`.
 3. **Vercel:** import this repo with root directory `web`, build command `node build.js`, output `dist`.
    Add the env vars `SUPABASE_URL` and `SUPABASE_ANON_KEY`.
-4. Push to `main`. Actions builds `GetDownTextTractor.apk` and publishes it as the latest release.
+4. Push to `main`. Actions builds `GetDownTextrator.apk` and publishes it as the latest release.
    The website's download button always points at the newest one.
 
 ## Logo
 
-The app uses the vector placeholder in `android/app/src/main/res/drawable/ic_logo.xml` and `web/logo.svg`.
+The app uses the vector placeholder in `android/app/src/main/res/drawable/ic_logo.xml` and `web/logo.png`.
 To use the real logo, replace those two files (and `ic_launcher_fg.xml`).

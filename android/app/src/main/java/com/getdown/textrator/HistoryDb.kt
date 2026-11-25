@@ -1,4 +1,4 @@
-package com.getdown.texttractor
+package com.getdown.textrator
 
 import android.content.ContentValues
 import android.content.Context
@@ -16,7 +16,7 @@ data class HistoryItem(
 )
 
 /** Local history of everything copied (the user's own dashboard) + an offline queue of usage events. */
-class HistoryDb private constructor(ctx: Context) : SQLiteOpenHelper(ctx, "texttractor.db", null, 1) {
+class HistoryDb private constructor(ctx: Context) : SQLiteOpenHelper(ctx, "textrator.db", null, 1) {
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(

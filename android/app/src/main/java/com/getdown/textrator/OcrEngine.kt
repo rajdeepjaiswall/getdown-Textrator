@@ -1,4 +1,4 @@
-package com.getdown.texttractor
+package com.getdown.textrator
 
 import android.graphics.Rect
 import com.google.mlkit.vision.common.InputImage

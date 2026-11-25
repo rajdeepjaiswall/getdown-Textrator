@@ -1,4 +1,4 @@
-package com.getdown.texttractor
+package com.getdown.textrator
 
 import android.annotation.SuppressLint
 import android.app.PendingIntent
@@ -7,7 +7,7 @@ import android.os.Build
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 
-/** Quick Settings tile: pull down the shade, tap "Text Tractor", the screen underneath is captured. */
+/** Quick Settings tile: pull down the shade, tap "Textrator", the screen underneath is captured. */
 class CaptureTileService : TileService() {
 
     override fun onStartListening() {

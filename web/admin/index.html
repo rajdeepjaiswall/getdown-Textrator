@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Admin: Get Down Text Tractor</title>
-<link rel="icon" href="/logo.svg"><link rel="stylesheet" href="/styles.css">
+<title>Admin: GETDOWN Textrator</title>
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="stylesheet" href="/styles.css">
 <style>
 .hidden{display:none!important}
 .login{max-width:400px;margin:40px auto}
@@ -14,7 +14,7 @@
 .kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
 .kpi .v{font-size:28px;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.1}
 .kpi .l{font-size:12px;color:var(--muted);margin-top:4px}
-.kpi.hero .v{color:var(--leaf-dark)}
+.kpi.hero{border-left:6px solid var(--leaf)}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
 .card h3{margin:0 0 2px;font-size:15px;color:var(--ink)}
 .card .sub{font-size:12px;color:var(--muted);margin-bottom:10px}
@@ -25,7 +25,7 @@
 .grid line{stroke:#F1ECE6}
 .src{display:grid;grid-template-columns:150px 1fr 48px;gap:8px;align-items:center;font-size:13px;margin:6px 0}
 .src .name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.src .bar{height:10px;border-radius:0 4px 4px 0;background:var(--leaf)}
+.src .bar{height:10px;border-radius:0 4px 4px 0;background:var(--leaf-dark)}
 .src .n{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink)}
 table{width:100%;border-collapse:collapse;font-size:13px}
 th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:700;padding:8px;border-bottom:1px solid var(--line);cursor:pointer;user-select:none;white-space:nowrap}
@@ -47,8 +47,8 @@ details summary{cursor:pointer;font-size:12px;color:var(--brown);margin-top:8px}
 <body>
 <div class="wrap" style="padding-bottom:48px">
   <nav class="nav">
-    <img src="/logo.svg" alt="">
-    <div class="brand">Text Tractor Admin<small>Get Down Foundation</small></div>
+    <img src="/logo.png" alt="">
+    <div class="brand">Textrator Admin<small>Getdown Foundation</small></div>
     <div class="spacer"></div>
     <span id="who" class="muted" style="font-size:13px"></span>
     <button id="refresh" class="btn btn-ghost hidden">Refresh</button>
@@ -61,7 +61,7 @@ details summary{cursor:pointer;font-size:12px;color:var(--brown);margin-top:8px}
 
   <!-- Login -->
   <div id="loginView" class="login card hidden">
-    <h2 style="margin:0 0 4px;color:var(--leaf-dark)">Admin sign in</h2>
+    <h2 style="margin:0 0 4px;color:var(--ink)">Admin sign in</h2>
     <p class="muted" style="margin:0 0 8px;font-size:14px">Only emails on the admin list can see the dashboard.</p>
     <form id="loginForm">
       <label for="email">Email</label><input id="email" type="email" autocomplete="username" required>
@@ -244,8 +244,8 @@ details summary{cursor:pointer;font-size:12px;color:var(--brown);margin-top:8px}
       document.querySelectorAll('input[name=mode]').forEach(r => r.checked = r.value === ov.auth_mode);
       $('announcement').value = ov.announcement || '';
       const rows = daily.map(d => ({ day: d.day, copies: +d.copies, active: +d.active_devices, captures: +d.captures }));
-      barChart($('chartCopies'), rows, 'copies', '#3E8E41', 'copies');
-      barChart($('chartActive'), rows, 'active', '#6D4C41', 'active devices');
+      barChart($('chartCopies'), rows, 'copies', '#4C8A06', 'copies');
+      barChart($('chartActive'), rows, 'active', '#B74012', 'active devices');
       $('dailyTable').innerHTML = '<tr><th>Day</th><th class="num">Active devices</th><th class="num">Captures</th><th class="num">Copies</th></tr>' +
         rows.slice().reverse().map(r => `<tr><td>${dayLabel(r.day, true)}</td><td class="num">${fmt(r.active)}</td><td class="num">${fmt(r.captures)}</td><td class="num">${fmt(r.copies)}</td></tr>`).join('');
       const top = Math.max(1, ...src.map(s => +s.copies));

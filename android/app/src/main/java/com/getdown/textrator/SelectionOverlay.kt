@@ -1,4 +1,4 @@
-package com.getdown.texttractor
+package com.getdown.textrator
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -67,7 +67,7 @@ class SelectionOverlay(
         canvasView = BlocksView(ctx)
         frame.addView(canvasView, FrameLayout.LayoutParams(-1, -1))
 
-        hint = pill("", 0xF2FFFFFF.toInt(), 0xFF2C6A2F.toInt()).apply { textSize = 13f }
+        hint = pill("", 0xF2FFFFFF.toInt(), 0xFF171717.toInt()).apply { textSize = 13f }
         frame.addView(hint, FrameLayout.LayoutParams(-2, -2, Gravity.TOP or Gravity.CENTER_HORIZONTAL).apply {
             topMargin = dp(48f)
         })
@@ -179,11 +179,11 @@ class SelectionOverlay(
     private fun action(label: String, primary: Boolean = false, onClick: () -> Unit) = TextView(ctx).apply {
         text = label
         textSize = 14f
-        setTextColor(if (primary) Color.WHITE else 0xFF4E342E.toInt())
+        setTextColor(0xFF171717.toInt())
         setPadding(dp(14f), dp(10f), dp(14f), dp(10f))
         background = GradientDrawable().apply {
             cornerRadius = dp(22f).toFloat()
-            setColor(if (primary) 0xFF3E8E41.toInt() else Color.TRANSPARENT)
+            setColor(if (primary) 0xFFA5E420.toInt() else Color.TRANSPARENT)
         }
         setOnClickListener { onClick() }
         layoutParams = LinearLayout.LayoutParams(-2, -2).apply { marginStart = dp(2f); marginEnd = dp(2f) }
@@ -192,12 +192,12 @@ class SelectionOverlay(
     /** Draws the boxes. Blocks are in screen pixels; the view's own screen offset is subtracted. */
     private inner class BlocksView(c: Context) : View(c) {
         private val scrim = Paint().apply { color = 0x22000000 }
-        private val fill = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0x2A3E8E41; style = Paint.Style.FILL }
-        private val stroke = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0xB33E8E41.toInt(); style = Paint.Style.STROKE; strokeWidth = dp(1.2f).toFloat() }
-        private val selFill = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0x663E8E41; style = Paint.Style.FILL }
-        private val selStroke = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0xFF2C6A2F.toInt(); style = Paint.Style.STROKE; strokeWidth = dp(2f).toFloat() }
+        private val fill = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0x33A5E420; style = Paint.Style.FILL }
+        private val stroke = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0xFF6EB90C.toInt(); style = Paint.Style.STROKE; strokeWidth = dp(1.2f).toFloat() }
+        private val selFill = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0x80A5E420.toInt(); style = Paint.Style.FILL }
+        private val selStroke = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0xFF171717.toInt(); style = Paint.Style.STROKE; strokeWidth = dp(2f).toFloat() }
         private val marquee = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = 0xFF6D4C41.toInt(); style = Paint.Style.STROKE; strokeWidth = dp(1.5f).toFloat()
+            color = 0xFFB74012.toInt(); style = Paint.Style.STROKE; strokeWidth = dp(1.5f).toFloat()
             pathEffect = DashPathEffect(floatArrayOf(dp(6f).toFloat(), dp(4f).toFloat()), 0f)
         }
         private val loc = IntArray(2)

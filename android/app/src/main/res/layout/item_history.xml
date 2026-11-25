@@ -13,7 +13,7 @@
         <TextView android:id="@+id/pin" android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:padding="6dp" android:text="Pin" android:textColor="@color/brown" android:textSize="12sp"/>
         <TextView android:id="@+id/copy" android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:padding="6dp" android:text="Copy" android:textStyle="bold" android:textColor="@color/leaf" android:textSize="12sp"/>
+            android:padding="6dp" android:text="Copy" android:textStyle="bold" android:textColor="@color/leaf_dark" android:textSize="12sp"/>
         <TextView android:id="@+id/share" android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:padding="6dp" android:text="Share" android:textColor="@color/leaf_dark" android:textSize="12sp"/>
         <TextView android:id="@+id/delete" android:layout_width="wrap_content" android:layout_height="wrap_content"
