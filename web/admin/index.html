@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Admin: Get Down Text Tractor</title>
+<link rel="icon" href="/logo.svg"><link rel="stylesheet" href="/styles.css">
+<style>
+.hidden{display:none!important}
+.login{max-width:400px;margin:40px auto}
+.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.top .spacer{flex:1}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.kpi .v{font-size:28px;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.1}
+.kpi .l{font-size:12px;color:var(--muted);margin-top:4px}
+.kpi.hero .v{color:var(--leaf-dark)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.card h3{margin:0 0 2px;font-size:15px;color:var(--ink)}
+.card .sub{font-size:12px;color:var(--muted);margin-bottom:10px}
+.chart{position:relative;height:200px}
+.chart svg{width:100%;height:100%;display:block;overflow:visible}
+.chart .tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:12px;padding:6px 9px;border-radius:8px;white-space:nowrap;transform:translate(-50%,-110%);opacity:0;transition:opacity .1s}
+.axis text{font-size:10px;fill:var(--muted)}
+.grid line{stroke:#F1ECE6}
+.src{display:grid;grid-template-columns:150px 1fr 48px;gap:8px;align-items:center;font-size:13px;margin:6px 0}
+.src .name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.src .bar{height:10px;border-radius:0 4px 4px 0;background:var(--leaf)}
+.src .n{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:700;padding:8px;border-bottom:1px solid var(--line);cursor:pointer;user-select:none;white-space:nowrap}
+td{padding:9px 8px;border-bottom:1px solid #F4EFE9;white-space:nowrap}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto}
+details summary{cursor:pointer;font-size:12px;color:var(--brown);margin-top:8px}
+.modes{display:grid;gap:8px;margin-top:6px}
+.mode{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer}
+.mode input{width:auto;margin-top:3px;accent-color:var(--leaf)}
+.mode b{display:block;font-size:14px}
+.mode span{font-size:12px;color:var(--muted)}
+.ok{color:var(--leaf-dark);font-size:13px;font-weight:600}
+.err{color:var(--danger);font-size:13px}
+@media (max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}.row2{grid-template-columns:1fr}}
+@media (max-width:600px){#who{display:none}.nav{flex-wrap:wrap}.nav .btn{padding:9px 14px;font-size:14px}.brand{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="wrap" style="padding-bottom:48px">
+  <nav class="nav">
+    <img src="/logo.svg" alt="">
+    <div class="brand">Text Tractor Admin<small>Get Down Foundation</small></div>
+    <div class="spacer"></div>
+    <span id="who" class="muted" style="font-size:13px"></span>
+    <button id="refresh" class="btn btn-ghost hidden">Refresh</button>
+    <button id="logout" class="btn btn-ghost hidden">Sign out</button>
+  </nav>
+
+  <div id="notConfigured" class="banner hidden">
+    The backend isn't connected yet. Add your Supabase URL and anon key to <code>config.js</code> (or the Vercel env vars), then redeploy.
+  </div>
+
+  <!-- Login -->
+  <div id="loginView" class="login card hidden">
+    <h2 style="margin:0 0 4px;color:var(--leaf-dark)">Admin sign in</h2>
+    <p class="muted" style="margin:0 0 8px;font-size:14px">Only emails on the admin list can see the dashboard.</p>
+    <form id="loginForm">
+      <label for="email">Email</label><input id="email" type="email" autocomplete="username" required>
+      <label for="password">Password</label><input id="password" type="password" autocomplete="current-password" minlength="6" required>
+      <div style="display:flex;gap:10px;margin-top:16px">
+        <button class="btn btn-primary" type="submit" id="loginBtn" style="flex:1">Sign in</button>
+        <button class="btn btn-ghost" type="button" id="signupBtn">First time? Create</button>
+      </div>
+      <p id="loginMsg" class="err"></p>
+    </form>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dash" class="hidden">
+    <div class="kpis">
+      <div class="kpi hero"><div class="v" id="k_total">–</div><div class="l">Installs (devices)</div></div>
+      <div class="kpi"><div class="v" id="k_users">–</div><div class="l">Logged-in users</div></div>
+      <div class="kpi"><div class="v" id="k_guests">–</div><div class="l">Guest devices</div></div>
+      <div class="kpi"><div class="v" id="k_today">–</div><div class="l">Active today</div></div>
+      <div class="kpi"><div class="v" id="k_7d">–</div><div class="l">Active in 7 days</div></div>
+      <div class="kpi"><div class="v" id="k_30d">–</div><div class="l">Active in 30 days</div></div>
+      <div class="kpi hero"><div class="v" id="k_copiesToday">–</div><div class="l">Copies today</div></div>
+      <div class="kpi"><div class="v" id="k_copies">–</div><div class="l">Copies all-time · <span id="k_captures">–</span> captures</div></div>
+    </div>
+
+    <div class="row2">
+      <div class="card">
+        <h3>Copies per day</h3><div class="sub">Last 30 days · India time</div>
+        <div class="chart" id="chartCopies"></div>
+      </div>
+      <div class="card">
+        <h3>Active devices per day</h3><div class="sub">Devices that captured or copied at least once</div>
+        <div class="chart" id="chartActive"></div>
+      </div>
+    </div>
+    <details class="card" style="margin-top:12px;padding:12px 20px"><summary>Show daily numbers as a table</summary>
+      <div class="tablewrap"><table id="dailyTable"></table></div>
+    </details>
+
+    <div class="row2">
+      <div class="card">
+        <h3>Top apps people copy from</h3><div class="sub">Last 30 days</div>
+        <div id="sources"></div>
+      </div>
+      <div class="card">
+        <h3>App settings</h3><div class="sub">Changes reach every phone the next time the app opens. No update needed.</div>
+        <div class="modes">
+          <label class="mode"><input type="radio" name="mode" value="optional"><div><b>Login optional</b><span>Users can sign in or tap “Continue without login”.</span></div></label>
+          <label class="mode"><input type="radio" name="mode" value="required"><div><b>Login required</b><span>Guests must create an account to keep using the app.</span></div></label>
+          <label class="mode"><input type="radio" name="mode" value="off"><div><b>Login off (bypass)</b><span>No login screen at all. Everyone uses it as a guest.</span></div></label>
+        </div>
+        <label for="announcement">Announcement banner in the app (optional)</label>
+        <textarea id="announcement" rows="2" maxlength="500" placeholder="e.g. New version available, download from getdown…"></textarea>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:12px">
+          <button class="btn btn-brown" id="saveSettings">Save settings</button><span id="settingsMsg"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <div class="top">
+        <div><h3>Users and devices</h3><div class="sub" id="usersSub">Most recently active first</div></div>
+        <div class="spacer"></div>
+        <input id="filter" placeholder="Search email, model…" style="max-width:260px">
+      </div>
+      <div class="tablewrap"><table id="users"></table></div>
+    </div>
+  </div>
+</div>
+
+<script src="/config.js"></script>
+<script>
+(() => {
+  const C = window.TT_CONFIG || {};
+  const URL_ = (C.supabaseUrl || '').replace(/\/$/, '');
+  const KEY = C.supabaseAnonKey || '';
+  const $ = (id) => document.getElementById(id);
+  const fmt = (n) => Number(n || 0).toLocaleString('en-IN');
+  const store = {
+    get() { try { return JSON.parse(localStorage.getItem('tt_admin_session') || 'null'); } catch { return null; } },
+    set(v) { try { v ? localStorage.setItem('tt_admin_session', JSON.stringify(v)) : localStorage.removeItem('tt_admin_session'); } catch {} }
+  };
+  let session = store.get();
+  let users = [], sortKey = 'last_seen', sortDir = -1;
+
+  function show(view) {
+    $('loginView').classList.toggle('hidden', view !== 'login');
+    $('dash').classList.toggle('hidden', view !== 'dash');
+    ['refresh', 'logout'].forEach(id => $(id).classList.toggle('hidden', view !== 'dash'));
+  }
+
+  async function auth(path, body) {
+    const r = await fetch(`${URL_}/auth/v1/${path}`, {
+      method: 'POST', headers: { apikey: KEY, 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+    });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(j.error_description || j.msg || j.message || 'Request failed');
+    return j;
+  }
+  function saveSession(j) {
+    session = { access: j.access_token, refresh: j.refresh_token, exp: Date.now() + (j.expires_in || 3600) * 1000, email: j.user && j.user.email };
+    store.set(session);
+  }
+  async function token() {
+    if (!session) return null;
+    if (Date.now() < session.exp - 60000) return session.access;
+    try { saveSession(await auth('token?grant_type=refresh_token', { refresh_token: session.refresh })); return session.access; }
+    catch { session = null; store.set(null); return null; }
+  }
+  async function rpc(fn, args = {}) {
+    const t = await token();
+    if (!t) throw Object.assign(new Error('Signed out'), { code: 401 });
+    const r = await fetch(`${URL_}/rest/v1/rpc/${fn}`, {
+      method: 'POST', headers: { apikey: KEY, Authorization: `Bearer ${t}`, 'Content-Type': 'application/json' }, body: JSON.stringify(args)
+    });
+    const j = await r.json().catch(() => null);
+    if (!r.ok) throw Object.assign(new Error((j && j.message) || 'Request failed'), { code: r.status });
+    return j;
+  }
+
+  // ---------- charts: single-series bars, hover tooltip, recessive grid ----------
+  function barChart(el, rows, key, color, label) {
+    const W = el.clientWidth || 480, H = 200, pl = 34, pr = 6, pt = 10, pb = 22;
+    const max = Math.max(1, ...rows.map(r => r[key]));
+    const nice = niceMax(max), iw = W - pl - pr, ih = H - pt - pb;
+    const step = iw / rows.length, bw = Math.max(2, step - 2); // 2px surface gap between bars
+    const y = v => pt + ih - (v / nice) * ih;
+    let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${label}">`;
+    s += '<g class="grid">';
+    for (let i = 0; i <= 4; i++) { const v = nice * i / 4, yy = y(v); s += `<line x1="${pl}" x2="${W - pr}" y1="${yy}" y2="${yy}"/>`; }
+    s += '</g><g class="axis">';
+    for (let i = 0; i <= 4; i++) { const v = nice * i / 4; s += `<text x="${pl - 6}" y="${y(v) + 3}" text-anchor="end">${fmt(v)}</text>`; }
+    rows.forEach((r, i) => { if ((i % 7 === 0 && rows.length - 1 - i >= 4) || i === rows.length - 1) s += `<text x="${pl + i * step + step / 2}" y="${H - 6}" text-anchor="middle">${dayLabel(r.day)}</text>`; });
+    s += '</g>';
+    rows.forEach((r, i) => {
+      const v = r[key], x = pl + i * step + 1, top = y(v), h = Math.max(0, pt + ih - top);
+      if (h > 0) {
+        const rr = Math.min(4, bw / 2, h);
+        s += `<path d="M${x},${pt + ih} V${top + rr} Q${x},${top} ${x + rr},${top} H${x + bw - rr} Q${x + bw},${top} ${x + bw},${top + rr} V${pt + ih} Z" fill="${color}"/>`;
+      }
+      s += `<rect data-i="${i}" x="${pl + i * step}" y="${pt}" width="${step}" height="${ih}" fill="transparent"/>`;
+    });
+    s += '</svg><div class="tip"></div>';
+    el.innerHTML = s;
+    const tip = el.querySelector('.tip');
+    el.querySelectorAll('rect[data-i]').forEach(rc => {
+      rc.addEventListener('mouseenter', () => {
+        const r = rows[+rc.dataset.i], bx = (+rc.getAttribute('x') + step / 2) / W * el.clientWidth;
+        tip.innerHTML = `<b>${fmt(r[key])}</b> ${label} · ${dayLabel(r.day, true)}`;
+        tip.style.left = bx + 'px'; tip.style.top = (y(r[key]) / H * el.clientHeight) + 'px'; tip.style.opacity = 1;
+      });
+      rc.addEventListener('mouseleave', () => tip.style.opacity = 0);
+    });
+  }
+  function niceMax(v) { const p = Math.pow(10, Math.floor(Math.log10(v))); const n = v / p; return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 4 ? 4 : n <= 5 ? 5 : 10) * p; }
+  function dayLabel(d, long) { const dt = new Date(d + 'T00:00:00'); return dt.toLocaleDateString('en-IN', long ? { weekday: 'short', day: 'numeric', month: 'short' } : { day: 'numeric', month: 'short' }); }
+  const ago = (t) => { if (!t) return '–'; const s = (Date.now() - new Date(t)) / 1000; if (s < 60) return 'just now'; if (s < 3600) return Math.floor(s / 60) + 'm ago'; if (s < 86400) return Math.floor(s / 3600) + 'h ago'; return Math.floor(s / 86400) + 'd ago'; };
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  function renderUsers() {
+    const q = $('filter').value.trim().toLowerCase();
+    const list = users.filter(u => !q || [u.email, u.model, u.app_version, u.device_id].some(v => String(v || '').toLowerCase().includes(q)))
+      .sort((a, b) => { const x = a[sortKey], y = b[sortKey]; return (x > y ? 1 : x < y ? -1 : 0) * sortDir; });
+    const cols = [['email', 'User'], ['model', 'Phone'], ['android', 'Android', 1], ['app_version', 'App'], ['copies', 'Copies', 1], ['captures', 'Captures', 1], ['first_seen', 'Joined'], ['last_seen', 'Last active']];
+    $('users').innerHTML = '<tr>' + cols.map(([k, l, n]) => `<th data-k="${k}" class="${n ? 'num' : ''}">${l}${sortKey === k ? (sortDir > 0 ? ' ↑' : ' ↓') : ''}</th>`).join('') + '</tr>' +
+      list.map(u => `<tr><td>${u.email ? esc(u.email) : '<span class="pill pill-brown">Guest</span>'}</td><td>${esc(u.model) || '–'}</td><td class="num">${u.android ?? '–'}</td><td>${esc(u.app_version) || '–'}</td><td class="num">${fmt(u.copies)}</td><td class="num">${fmt(u.captures)}</td><td>${u.first_seen ? new Date(u.first_seen).toLocaleDateString('en-IN') : '–'}</td><td>${ago(u.last_seen)}</td></tr>`).join('') +
+      (list.length ? '' : '<tr><td colspan="8" class="muted" style="padding:18px">No devices yet. Install the app and open it once.</td></tr>');
+    $('usersSub').textContent = `${list.length} of ${users.length} devices`;
+    $('users').querySelectorAll('th').forEach(th => th.onclick = () => { const k = th.dataset.k; sortDir = sortKey === k ? -sortDir : -1; sortKey = k; renderUsers(); });
+  }
+
+  async function load() {
+    try {
+      const [ov, daily, us, src] = await Promise.all([rpc('tt_admin_overview'), rpc('tt_admin_daily', { p_days: 30 }), rpc('tt_admin_users', { p_limit: 1000 }), rpc('tt_admin_top_sources', { p_days: 30 })]);
+      $('k_total').textContent = fmt(ov.total_devices); $('k_users').textContent = fmt(ov.registered_users);
+      $('k_guests').textContent = fmt(ov.guest_devices); $('k_today').textContent = fmt(ov.active_today);
+      $('k_7d').textContent = fmt(ov.active_7d); $('k_30d').textContent = fmt(ov.active_30d);
+      $('k_copiesToday').textContent = fmt(ov.copies_today); $('k_copies').textContent = fmt(ov.copies_total);
+      $('k_captures').textContent = fmt(ov.captures_total);
+      document.querySelectorAll('input[name=mode]').forEach(r => r.checked = r.value === ov.auth_mode);
+      $('announcement').value = ov.announcement || '';
+      const rows = daily.map(d => ({ day: d.day, copies: +d.copies, active: +d.active_devices, captures: +d.captures }));
+      barChart($('chartCopies'), rows, 'copies', '#3E8E41', 'copies');
+      barChart($('chartActive'), rows, 'active', '#6D4C41', 'active devices');
+      $('dailyTable').innerHTML = '<tr><th>Day</th><th class="num">Active devices</th><th class="num">Captures</th><th class="num">Copies</th></tr>' +
+        rows.slice().reverse().map(r => `<tr><td>${dayLabel(r.day, true)}</td><td class="num">${fmt(r.active)}</td><td class="num">${fmt(r.captures)}</td><td class="num">${fmt(r.copies)}</td></tr>`).join('');
+      const top = Math.max(1, ...src.map(s => +s.copies));
+      $('sources').innerHTML = src.length ? src.map(s => `<div class="src"><div class="name" title="${esc(s.source)}">${esc(prettyPkg(s.source))}</div><div><div class="bar" style="width:${(+s.copies / top) * 100}%"></div></div><div class="n">${fmt(s.copies)}</div></div>`).join('')
+        : '<p class="muted" style="font-size:13px">No copies yet.</p>';
+      users = us; renderUsers();
+      show('dash');
+      $('who').textContent = session.email || '';
+    } catch (e) {
+      if (e.code === 401) { show('login'); return; }
+      if (/Not an admin/i.test(e.message)) { show('login'); $('loginMsg').textContent = `${session && session.email} is not on the admin list.`; session = null; store.set(null); return; }
+      show('login'); $('loginMsg').textContent = e.message;
+    }
+  }
+  const PKG = { 'com.whatsapp': 'WhatsApp', 'com.instagram.android': 'Instagram', 'com.google.android.youtube': 'YouTube', 'com.android.chrome': 'Chrome', 'com.facebook.katana': 'Facebook', 'org.telegram.messenger': 'Telegram', 'com.twitter.android': 'X (Twitter)', 'com.google.android.apps.photos': 'Google Photos', 'photo': 'Shared photo', 'unknown': 'Unknown' };
+  const prettyPkg = (p) => PKG[p] || p;
+
+  $('loginForm').onsubmit = async (e) => {
+    e.preventDefault(); $('loginMsg').textContent = ''; $('loginBtn').disabled = true;
+    try { saveSession(await auth('token?grant_type=password', { email: $('email').value.trim(), password: $('password').value })); await load(); }
+    catch (err) { $('loginMsg').textContent = err.message; }
+    $('loginBtn').disabled = false;
+  };
+  $('signupBtn').onclick = async () => {
+    $('loginMsg').textContent = '';
+    try {
+      const j = await auth('signup', { email: $('email').value.trim(), password: $('password').value });
+      if (j.access_token) { saveSession(j); await load(); }
+      else { $('loginMsg').className = 'ok'; $('loginMsg').textContent = 'Check your email to confirm, then sign in.'; }
+    } catch (err) { $('loginMsg').className = 'err'; $('loginMsg').textContent = err.message; }
+  };
+  $('logout').onclick = () => { session = null; store.set(null); show('login'); $('who').textContent = ''; };
+  $('refresh').onclick = load;
+  $('filter').oninput = renderUsers;
+  $('saveSettings').onclick = async () => {
+    const mode = (document.querySelector('input[name=mode]:checked') || {}).value || 'optional';
+    $('settingsMsg').className = ''; $('settingsMsg').textContent = 'Saving…';
+    try { await rpc('tt_admin_update_settings', { p_auth_mode: mode, p_announcement: $('announcement').value }); $('settingsMsg').className = 'ok'; $('settingsMsg').textContent = '✓ Saved'; }
+    catch (e) { $('settingsMsg').className = 'err'; $('settingsMsg').textContent = e.message; }
+  };
+  let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (!$('dash').classList.contains('hidden')) load(); }, 300); });
+
+  if (!URL_ || !KEY) { $('notConfigured').classList.remove('hidden'); show('none'); return; }
+  if (session) load(); else show('login');
+})();
+</script>
+</body>
+</html>

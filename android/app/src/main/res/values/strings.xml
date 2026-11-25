@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Get Down Text Tractor</string>
+    <string name="service_label">Get Down Text Tractor</string>
+    <string name="service_description">Shows the Text Tractor bubble over your apps. When you tap it, it reads the text on your screen (and takes a screenshot to read text inside images) so you can select and copy it. Everything stays on your phone. Nothing is read until you tap the bubble.</string>
+    <string name="tile_label">Text Tractor</string>
+</resources>

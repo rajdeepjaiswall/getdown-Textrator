@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="cream">#FAF7F0</color>
+    <color name="leaf">#3E8E41</color>
+    <color name="leaf_dark">#2C6A2F</color>
+    <color name="leaf_light">#DCEFD9</color>
+    <color name="brown">#6D4C41</color>
+    <color name="brown_dark">#4E342E</color>
+    <color name="brown_light">#EFE6E1</color>
+    <color name="ink">#2B2622</color>
+    <color name="muted">#7A6E66</color>
+    <color name="danger">#B3261E</color>
+    <color name="scrim">#66000000</color>
+</resources>

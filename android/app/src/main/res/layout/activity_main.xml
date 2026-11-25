@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@color/cream"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center_vertical"
+        android:paddingStart="20dp" android:paddingEnd="8dp" android:paddingTop="12dp" android:paddingBottom="8dp">
+        <ImageView android:layout_width="40dp" android:layout_height="40dp" android:src="@drawable/ic_logo"
+            android:contentDescription="@string/app_name"/>
+        <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+            android:orientation="vertical" android:paddingStart="12dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="Text Tractor" android:textSize="20sp" android:textStyle="bold" android:textColor="@color/leaf_dark"/>
+            <TextView android:id="@+id/account" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="by Get Down" android:textSize="12sp" android:textColor="@color/brown"/>
+        </LinearLayout>
+        <Button android:id="@+id/settings" style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Settings"
+            android:textColor="@color/brown"/>
+    </LinearLayout>
+
+    <TextView android:id="@+id/announcement" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp" android:layout_marginBottom="8dp" android:padding="12dp"
+        android:background="@color/brown_light" android:textColor="@color/brown_dark" android:textSize="13sp"
+        android:visibility="gone"/>
+
+    <LinearLayout android:id="@+id/statusCard" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp" android:background="@drawable/card_bg"
+        android:orientation="vertical" android:padding="16dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical">
+            <TextView android:id="@+id/statusTitle" android:layout_width="0dp" android:layout_weight="1"
+                android:layout_height="wrap_content" android:textSize="16sp" android:textStyle="bold"
+                android:textColor="@color/ink" android:text="Bubble is on"/>
+            <com.google.android.material.materialswitch.MaterialSwitch android:id="@+id/bubbleSwitch"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <TextView android:id="@+id/statusText" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="4dp" android:textSize="13sp" android:textColor="@color/muted"
+            android:text="Tap the floating leaf on any screen to select and copy its text."/>
+        <Button android:id="@+id/fixSetup" style="@style/Widget.Material3.Button"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp"
+            android:text="Finish setup" android:visibility="gone"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:layout_marginHorizontal="16dp" android:layout_marginTop="10dp">
+        <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+            android:orientation="vertical" android:background="@drawable/card_bg" android:padding="14dp"
+            android:layout_marginEnd="5dp">
+            <TextView android:id="@+id/statToday" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="0" android:textSize="22sp" android:textStyle="bold" android:textColor="@color/leaf"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="Copied today" android:textSize="12sp" android:textColor="@color/muted"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+            android:orientation="vertical" android:background="@drawable/card_bg" android:padding="14dp"
+            android:layout_marginStart="5dp">
+            <TextView android:id="@+id/statTotal" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="0" android:textSize="22sp" android:textStyle="bold" android:textColor="@color/brown"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="Saved in history" android:textSize="12sp" android:textColor="@color/muted"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button android:id="@+id/fromImage" style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp" android:layout_marginTop="10dp"
+        android:text="Extract text from a photo"/>
+
+    <EditText android:id="@+id/search" android:layout_width="match_parent" android:layout_height="48dp"
+        android:layout_marginHorizontal="16dp" android:layout_marginTop="12dp"
+        android:background="@drawable/card_bg" android:paddingHorizontal="14dp"
+        android:hint="Search your copied text" android:inputType="text" android:imeOptions="actionSearch"
+        android:importantForAutofill="no" android:textSize="14sp"/>
+
+    <FrameLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
+        <androidx.recyclerview.widget.RecyclerView android:id="@+id/list"
+            android:layout_width="match_parent" android:layout_height="match_parent"
+            android:clipToPadding="false" android:paddingHorizontal="16dp" android:paddingTop="8dp" android:paddingBottom="24dp"/>
+        <TextView android:id="@+id/empty" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_gravity="center" android:gravity="center" android:padding="32dp"
+            android:textColor="@color/muted" android:textSize="14sp"
+            android:text="Nothing copied yet.\nTap the floating leaf on any app, pick the text, hit Copy, and it will show up here."/>
+    </FrameLayout>
+</LinearLayout>

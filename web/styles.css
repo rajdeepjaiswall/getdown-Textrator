@@ -1,0 +1,34 @@
+:root{
+  --white:#fff; --cream:#FAF7F0; --leaf:#3E8E41; --leaf-dark:#2C6A2F; --leaf-light:#DCEFD9;
+  --brown:#6D4C41; --brown-dark:#4E342E; --brown-light:#EFE6E1; --ink:#2B2622; --muted:#7A6E66;
+  --line:#EAE2DA; --danger:#B3261E; --radius:16px;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Devanagari", sans-serif;
+  color: var(--ink); background: var(--cream);
+}
+*{box-sizing:border-box}
+body{margin:0;line-height:1.5}
+a{color:var(--leaf-dark)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.nav{display:flex;align-items:center;gap:12px;padding:18px 0}
+.nav img{width:40px;height:40px}
+.brand{font-weight:800;font-size:18px;color:var(--leaf-dark);line-height:1.1}
+.brand small{display:block;font-weight:500;font-size:12px;color:var(--brown)}
+.nav .spacer{flex:1}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;
+  padding:12px 20px;font-weight:700;font-size:15px;cursor:pointer;text-decoration:none;transition:transform .08s, background .15s}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--leaf);color:#fff}
+.btn-primary:hover{background:var(--leaf-dark)}
+.btn-ghost{background:transparent;color:var(--brown);border:1px solid var(--line)}
+.btn-ghost:hover{background:var(--brown-light)}
+.btn-brown{background:var(--brown);color:#fff}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.muted{color:var(--muted)}
+input,select,textarea{font:inherit;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 14px;width:100%}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--leaf-light);border-color:var(--leaf)}
+label{font-size:13px;font-weight:600;color:var(--brown-dark);display:block;margin:12px 0 6px}
+.banner{background:var(--brown-light);color:var(--brown-dark);border-radius:12px;padding:12px 14px;font-size:14px}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700}
+.pill-green{background:var(--leaf-light);color:var(--leaf-dark)}
+.pill-brown{background:var(--brown-light);color:var(--brown-dark)}

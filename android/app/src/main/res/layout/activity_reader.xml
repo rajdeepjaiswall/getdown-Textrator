@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="vertical" android:padding="18dp" android:background="@color/white">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center_vertical">
+        <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@drawable/ic_logo"
+            android:contentDescription="@string/app_name"/>
+        <TextView android:id="@+id/title" android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="wrap_content" android:paddingStart="10dp"
+            android:text="Extracted text" android:textSize="17sp" android:textStyle="bold" android:textColor="@color/leaf_dark"/>
+    </LinearLayout>
+    <TextView android:id="@+id/hint" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="4dp" android:textSize="12sp" android:textColor="@color/muted"
+        android:text="Long-press to select exact words, or edit before copying."/>
+    <ProgressBar android:id="@+id/progress" android:layout_width="32dp" android:layout_height="32dp"
+        android:layout_gravity="center" android:layout_margin="24dp" android:visibility="gone"/>
+        <EditText android:id="@+id/text" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:minHeight="160dp" android:maxHeight="420dp" android:gravity="top|start"
+            android:background="@color/cream" android:padding="12dp" android:textSize="15sp"
+            android:textColor="@color/ink" android:inputType="textMultiLine|textNoSuggestions"
+            android:importantForAutofill="no" android:scrollbars="vertical" android:layout_marginTop="10dp"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="end" android:layout_marginTop="12dp">
+        <Button android:id="@+id/close" style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Close"
+            android:textColor="@color/brown"/>
+        <Button android:id="@+id/share" style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Share"/>
+        <Button android:id="@+id/copySel" style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Copy selected"
+            android:layout_marginStart="4dp"/>
+        <Button android:id="@+id/copyAll" style="@style/Widget.Material3.Button"
+            android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Copy all"
+            android:layout_marginStart="6dp"/>
+    </LinearLayout>
+</LinearLayout>

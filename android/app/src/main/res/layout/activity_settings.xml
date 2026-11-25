@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/cream" android:fitsSystemWindows="true">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="20dp">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Settings" android:textSize="22sp" android:textStyle="bold" android:textColor="@color/leaf_dark"/>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14dp"
+            android:orientation="vertical" android:background="@drawable/card_bg" android:padding="12dp">
+            <com.google.android.material.materialswitch.MaterialSwitch android:id="@+id/swBubble"
+                android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Show floating bubble"/>
+            <com.google.android.material.materialswitch.MaterialSwitch android:id="@+id/swSmart"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="Grow the bubble a little on text-heavy screens"/>
+            <com.google.android.material.materialswitch.MaterialSwitch android:id="@+id/swOcr"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="Read text inside images (OCR, Android 11+)"/>
+            <com.google.android.material.materialswitch.MaterialSwitch android:id="@+id/swHistory"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="Save copied text to history"/>
+            <com.google.android.material.materialswitch.MaterialSwitch android:id="@+id/swHaptics"
+                android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Vibrate on tap"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp"
+            android:orientation="vertical" android:background="@drawable/card_bg" android:padding="16dp">
+            <TextView android:id="@+id/sizeLabel" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="Bubble size" android:textColor="@color/ink"/>
+            <SeekBar android:id="@+id/size" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:max="40"/>
+            <TextView android:id="@+id/opacityLabel" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" android:text="See-through level" android:textColor="@color/ink"/>
+            <SeekBar android:id="@+id/opacity" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:max="75"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp"
+            android:orientation="vertical" android:background="@drawable/card_bg" android:padding="16dp">
+            <TextView android:id="@+id/accountText" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textColor="@color/ink" android:text="Account"/>
+            <Button android:id="@+id/accountBtn" style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp"
+                android:text="Log in"/>
+        </LinearLayout>
+
+        <Button android:id="@+id/permissions" style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp"
+            android:text="Permissions and setup"/>
+        <Button android:id="@+id/clear" style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp"
+            android:text="Clear all history" android:textColor="@color/danger"/>
+        <TextView android:id="@+id/version" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="12dp" android:gravity="center" android:textSize="12sp" android:textColor="@color/muted"/>
+    </LinearLayout>
+</ScrollView>

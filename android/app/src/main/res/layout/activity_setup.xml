@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/cream" android:fitsSystemWindows="true">
+    <LinearLayout android:id="@+id/steps" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="20dp">
+        <ImageView android:layout_width="56dp" android:layout_height="56dp" android:src="@drawable/ic_logo"
+            android:contentDescription="@string/app_name"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10dp"
+            android:text="Set up Text Tractor" android:textSize="22sp" android:textStyle="bold" android:textColor="@color/leaf_dark"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp"
+            android:text="Four quick steps. Each one only needs a tap." android:textColor="@color/brown"/>
+
+        <!-- 1. Prominent disclosure (required by Google Play before asking for accessibility) -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="18dp"
+            android:orientation="vertical" android:background="@drawable/card_bg" android:padding="16dp">
+            <TextView android:id="@+id/s1Title" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="1. How Text Tractor uses your screen" android:textStyle="bold" android:textColor="@color/ink" android:textSize="15sp"/>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp"
+                android:textSize="13sp" android:textColor="@color/muted"
+                android:text="Text Tractor uses Android's Accessibility Service to show its floating bubble and, only when you tap the bubble, to read the text on your screen and take a screenshot so it can read text inside images.\n\n• Reading happens on your phone. Screen content and screenshots are never uploaded.\n• Screenshots are deleted right after the text is read.\n• Text you copy is saved only in this app's history, which you can delete at any time.\n• We only send anonymous usage counts (how many copies, from which app) to improve the service.\n• It never reads passwords, and it doesn't control your phone or tap anything for you."/>
+            <CheckBox android:id="@+id/consent" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" android:text="I understand and agree"/>
+        </LinearLayout>
+
+        <!-- 2. Accessibility -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp"
+            android:orientation="vertical" android:background="@drawable/card_bg" android:padding="16dp">
+            <TextView android:id="@+id/s2Title" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="2. Turn on Text Tractor in Accessibility" android:textStyle="bold" android:textColor="@color/ink" android:textSize="15sp"/>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp"
+                android:textSize="13sp" android:textColor="@color/muted"
+                android:text="Open Accessibility, then Installed apps (or Downloaded apps), then Get Down Text Tractor. Switch it on and tap Allow."/>
+            <Button android:id="@+id/s2Btn" style="@style/Widget.Material3.Button"
+                android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp"
+                android:text="Open Accessibility settings"/>
+            <TextView android:id="@+id/restrictedHelp" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" android:padding="10dp" android:background="@color/brown_light"
+                android:textSize="12sp" android:textColor="@color/brown_dark"
+                android:text="Switch greyed out, or it says &quot;Restricted setting&quot;? Android blocks this for apps installed from an APK. Fix: tap the button below, then ⋮ (top right), then Allow restricted settings. Then come back and try step 2 again."/>
+            <Button android:id="@+id/restrictedBtn" style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="Open App info" android:textColor="@color/brown"/>
+        </LinearLayout>
+
+        <!-- 3. Battery -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp"
+            android:orientation="vertical" android:background="@drawable/card_bg" android:padding="16dp">
+            <TextView android:id="@+id/s3Title" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="3. Keep the bubble alive" android:textStyle="bold" android:textColor="@color/ink" android:textSize="15sp"/>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp"
+                android:textSize="13sp" android:textColor="@color/muted"
+                android:text="Battery savers often switch off apps like this without telling you. Set Text Tractor to Unrestricted or Don't optimise. It uses almost no battery."/>
+            <Button android:id="@+id/s3Btn" style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp"
+                android:text="Allow running in background"/>
+        </LinearLayout>
+
+        <!-- 4. OEM autostart -->
+        <LinearLayout android:id="@+id/s4Card" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp"
+            android:orientation="vertical" android:background="@drawable/card_bg" android:padding="16dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="4. Allow Autostart (Xiaomi, Oppo, Vivo, Realme…)" android:textStyle="bold" android:textColor="@color/ink" android:textSize="15sp"/>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp"
+                android:textSize="13sp" android:textColor="@color/muted"
+                android:text="Your phone's brand has an extra Autostart switch. Turn it on for Get Down Text Tractor so the bubble comes back after a restart."/>
+            <Button android:id="@+id/s4Btn" style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp"
+                android:text="Open Autostart settings"/>
+        </LinearLayout>
+
+        <Button android:id="@+id/done" style="@style/Widget.Material3.Button"
+            android:layout_width="match_parent" android:layout_height="56dp" android:layout_marginTop="18dp"
+            android:text="Done"/>
+    </LinearLayout>
+</ScrollView>
