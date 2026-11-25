@@ -159,7 +159,7 @@ class TractorService : AccessibilityService() {
         val wait = 1100 - (SystemClock.uptimeMillis() - lastShotAt)
         if (wait > 0) delay(wait)
         var bmp = shotOnce()
-        if (bmp == null && lastShotError == ERROR_TAKE_SCREENSHOT_INTERVAL_TIME_SHORT) {
+        if (bmp == null && lastShotError == AccessibilityService.ERROR_TAKE_SCREENSHOT_INTERVAL_TIME_SHORT) {
             delay(1100); bmp = shotOnce()
         }
         return bmp
@@ -170,8 +170,8 @@ class TractorService : AccessibilityService() {
         lastShotAt = SystemClock.uptimeMillis()
         lastShotError = 0
         try {
-            takeScreenshot(Display.DEFAULT_DISPLAY, mainExecutor, object : TakeScreenshotCallback {
-                override fun onSuccess(result: ScreenshotResult) {
+            takeScreenshot(Display.DEFAULT_DISPLAY, mainExecutor, object : AccessibilityService.TakeScreenshotCallback {
+                override fun onSuccess(result: AccessibilityService.ScreenshotResult) {
                     val hb = result.hardwareBuffer
                     val bmp = try {
                         // ML Kit can't read HARDWARE bitmaps; copy to a normal one.
@@ -191,8 +191,8 @@ class TractorService : AccessibilityService() {
     }
 
     fun dismissShadeThenCapture() {
-        if (Build.VERSION.SDK_INT >= 31) performGlobalAction(GLOBAL_ACTION_DISMISS_NOTIFICATION_SHADE)
-        else performGlobalAction(GLOBAL_ACTION_BACK)
+        if (Build.VERSION.SDK_INT >= 31) performGlobalAction(AccessibilityService.GLOBAL_ACTION_DISMISS_NOTIFICATION_SHADE)
+        else performGlobalAction(AccessibilityService.GLOBAL_ACTION_BACK)
         handler.postDelayed({ capture() }, 650)
     }
 

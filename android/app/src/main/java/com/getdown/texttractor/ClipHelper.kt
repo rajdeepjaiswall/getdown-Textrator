@@ -30,12 +30,15 @@ object ClipHelper {
         ctx.startActivity(Intent.createChooser(send, "Share text").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
     }
 
+    @Suppress("DEPRECATION")
+    private fun legacyInfo(pm: PackageManager, pkg: String) = pm.getApplicationInfo(pkg, 0)
+
     fun appLabel(ctx: Context, pkg: String): String {
         if (pkg.isBlank()) return "Unknown app"
         return try {
             val pm = ctx.packageManager
             val info = if (Build.VERSION.SDK_INT >= 33) pm.getApplicationInfo(pkg, PackageManager.ApplicationInfoFlags.of(0))
-            else @Suppress("DEPRECATION") pm.getApplicationInfo(pkg, 0)
+            else legacyInfo(pm, pkg)
             pm.getApplicationLabel(info).toString()
         } catch (_: Exception) {
             pkg.substringAfterLast('.')

@@ -88,8 +88,11 @@ class ReaderActivity : AppCompatActivity() {
     private fun imageFromShare(): Uri? {
         if (intent.action != Intent.ACTION_SEND || intent.type?.startsWith("image/") != true) return null
         return if (Build.VERSION.SDK_INT >= 33) intent.getParcelableExtra(Intent.EXTRA_STREAM, Uri::class.java)
-        else @Suppress("DEPRECATION") intent.getParcelableExtra(Intent.EXTRA_STREAM)
+        else legacyStream()
     }
+
+    @Suppress("DEPRECATION")
+    private fun legacyStream(): Uri? = intent.getParcelableExtra(Intent.EXTRA_STREAM) as? Uri
 
     private fun toast(s: String) = Toast.makeText(this, s, Toast.LENGTH_SHORT).show()
 

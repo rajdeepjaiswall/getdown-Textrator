@@ -135,7 +135,7 @@ class MainActivity : AppCompatActivity() {
 
         fun submit(list: List<HistoryItem>) {
             items = list
-            @Suppress("NotifyDataSetChanged") notifyDataSetChanged()
+            notifyDataSetChanged()
         }
 
         inner class VH(v: View) : RecyclerView.ViewHolder(v) {

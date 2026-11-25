@@ -7,13 +7,14 @@ import android.os.Build
 import android.view.WindowManager
 
 object Screen {
+    @Suppress("DEPRECATION")
     fun bounds(ctx: Context): Rect {
         val wm = ctx.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         return if (Build.VERSION.SDK_INT >= 30) {
             Rect(wm.currentWindowMetrics.bounds)
         } else {
             val p = Point()
-            @Suppress("DEPRECATION") wm.defaultDisplay.getRealSize(p)
+            wm.defaultDisplay.getRealSize(p)
             Rect(0, 0, p.x, p.y)
         }
     }
