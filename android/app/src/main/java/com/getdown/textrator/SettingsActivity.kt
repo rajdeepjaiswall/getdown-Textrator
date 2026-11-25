@@ -29,10 +29,12 @@ class SettingsActivity : AppCompatActivity() {
 
         val sizeLabel = findViewById<TextView>(R.id.sizeLabel)
         val size = findViewById<SeekBar>(R.id.size)
-        size.progress = Prefs.bubbleSizeDp - 40
+        val min = BubbleController.MIN_DP
+        size.max = BubbleController.MAX_DP - min
+        size.progress = Prefs.bubbleSizeDp - min
         sizeLabel.text = "Bubble size: ${Prefs.bubbleSizeDp} dp"
-        size.setOnSeekBarChangeListener(seek({ p -> sizeLabel.text = "Bubble size: ${p + 40} dp" }) { p ->
-            Prefs.bubbleSizeDp = p + 40; applyBubble()
+        size.setOnSeekBarChangeListener(seek({ p -> sizeLabel.text = "Bubble size: ${p + min} dp" }) { p ->
+            Prefs.bubbleSizeDp = p + min; applyBubble()
         })
 
         val opLabel = findViewById<TextView>(R.id.opacityLabel)

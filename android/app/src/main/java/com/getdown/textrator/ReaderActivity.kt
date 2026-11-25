@@ -54,7 +54,7 @@ class ReaderActivity : AppCompatActivity() {
                 edit.visibility = View.GONE
                 lifecycleScope.launch {
                     val text = try {
-                        OcrEngine.fullText(OcrEngine.recognize(InputImage.fromFilePath(this@ReaderActivity, image)))
+                        OcrEngine.recognizeText(InputImage.fromFilePath(this@ReaderActivity, image))
                     } catch (e: Exception) { "" }
                     progress.visibility = View.GONE
                     edit.visibility = View.VISIBLE

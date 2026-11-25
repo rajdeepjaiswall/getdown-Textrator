@@ -58,6 +58,19 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.fromImage).setOnClickListener {
             pickImage.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
+        val sizeLabel = findViewById<TextView>(R.id.sizeLabel)
+        val slider = findViewById<com.google.android.material.slider.Slider>(R.id.sizeSlider)
+        val current = (Prefs.bubbleSizeDp.coerceIn(BubbleController.MIN_DP, BubbleController.MAX_DP) / 2) * 2
+        slider.value = current.toFloat()
+        sizeLabel.text = "Bubble size: ${sizeName(current)}"
+        slider.addOnChangeListener { _, v, _ -> sizeLabel.text = "Bubble size: ${sizeName(v.toInt())}" }
+        slider.addOnSliderTouchListener(object : com.google.android.material.slider.Slider.OnSliderTouchListener {
+            override fun onStartTrackingTouch(s: com.google.android.material.slider.Slider) {}
+            override fun onStopTrackingTouch(s: com.google.android.material.slider.Slider) {
+                Prefs.bubbleSizeDp = s.value.toInt()
+                Engine.refreshBubble() // see the new size right away
+            }
+        })
         findViewById<MaterialSwitch>(R.id.bubbleSwitch).setOnCheckedChangeListener { _, on ->
             if (suppressSwitch) return@setOnCheckedChangeListener
             Engine.setBubble(this, on)
@@ -75,6 +88,13 @@ class MainActivity : AppCompatActivity() {
             showAnnouncement()
             if (Backend.needsLogin()) { startActivity(Intent(this@MainActivity, LoginActivity::class.java)); finish() }
         }
+    }
+
+    private fun sizeName(dp: Int) = when {
+        dp <= 34 -> "tiny ($dp)"
+        dp <= 44 -> "small ($dp)"
+        dp <= 56 -> "medium ($dp)"
+        else -> "large ($dp)"
     }
 
     private fun showAnnouncement() {
@@ -104,12 +124,12 @@ class MainActivity : AppCompatActivity() {
             !Engine.isBubbleOn() -> {
                 title.text = "Bubble is off"
                 text.text = if (Engine.USES_ACCESSIBILITY) "Switch it on, or use the Textrator tile in Quick Settings."
-                else "Switch it on. Android will ask to allow screen capture. Choose Entire screen, then Start."
+                else "Switch it on to show the bubble. The first time you tap it, Android asks for screen access once."
                 fix.visibility = View.GONE
             }
             else -> {
                 title.text = "Bubble is on"
-                text.text = "Tap the floating bubble on any screen to select and copy its text. Drag it to move it. Long-press it to open this app."
+                text.text = "Tap the bubble on any screen, then tap or drag across words to copy them. Drag the bubble to ✕ at the bottom to switch it off."
                 fix.visibility = View.GONE
             }
         }

@@ -4,6 +4,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application>
@@ -15,9 +16,15 @@
             android:taskAffinity="com.getdown.textrator.starter"
             android:theme="@style/Theme.Textrator.Translucent" />
 
+        <!-- specialUse keeps the bubble alive while screen access is off; mediaProjection is added only
+             while a screen-access session is open. -->
         <service
             android:name=".ProjectionService"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection" />
+            android:foregroundServiceType="mediaProjection|specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Floating bubble the user taps to copy text from the screen" />
+        </service>
     </application>
 </manifest>

@@ -44,7 +44,7 @@ object Prefs {
         set(v) = pb("guest", v)
 
     var bubbleSizeDp: Int
-        get() = i("bubble_size", 52)
+        get() = i("bubble_size", 40)
         set(v) = pi("bubble_size", v)
     /** Idle opacity in percent: the bubble is see-through until touched. */
     var bubbleOpacity: Int

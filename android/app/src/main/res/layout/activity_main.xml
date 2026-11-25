@@ -41,6 +41,12 @@
         <TextView android:id="@+id/statusText" android:layout_width="match_parent" android:layout_height="wrap_content"
             android:layout_marginTop="4dp" android:textSize="13sp" android:textColor="@color/muted"
             android:text="Tap the floating bubble on any screen to select and copy its text."/>
+        <TextView android:id="@+id/sizeLabel" android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="12dp" android:textSize="13sp" android:textColor="@color/ink" android:text="Bubble size"/>
+        <com.google.android.material.slider.Slider android:id="@+id/sizeSlider"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:valueFrom="28" android:valueTo="72" android:stepSize="2" android:value="40"
+            android:contentDescription="Bubble size"/>
         <Button android:id="@+id/fixSetup" style="@style/Widget.Material3.Button"
             android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp"
             android:text="Finish setup" android:visibility="gone"/>

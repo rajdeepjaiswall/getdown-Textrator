@@ -28,9 +28,13 @@ class CaptureController(
     private val windowType: Int,
     private val readNodes: suspend () -> NodeRead,
     private val takeShot: suspend () -> Shot,
+    /** Called when the user drags the bubble onto the ✕ to switch it off. */
+    onClose: () -> Unit,
+    /** Optional: what a tap does (Go build may need to ask for screen access first). */
+    onTap: (() -> Unit)? = null,
 ) {
     private val scope = MainScope()
-    val bubble = BubbleController(ctx, wm, windowType) { capture() }
+    val bubble = BubbleController(ctx, wm, windowType, onTap = { (onTap ?: { capture() })() }, onClose = onClose)
     var selection: SelectionOverlay? = null
         private set
     var capturing = false
@@ -48,7 +52,7 @@ class CaptureController(
                 val nodes = withContext(Dispatchers.Default) {
                     try { readNodes() } catch (_: Exception) { NodeRead(emptyList(), "") }
                 }
-                var ocr: List<TextBlock> = emptyList()
+                var ocr: List<OcrLine> = emptyList()
                 var notice: String? = null
                 if (Prefs.useOcr || nodes.blocks.isEmpty()) {
                     val shot = try { takeShot() } catch (_: Exception) { Shot(null, "Couldn't capture the screen.") }
@@ -74,7 +78,10 @@ class CaptureController(
                     bubble.hide()
                     val sel = SelectionOverlay(ctx, wm, windowType, blocks, nodes.sourcePkg, method, notice) {
                         selection = null
-                        if (Prefs.bubbleEnabled) bubble.show()
+                        if (Prefs.bubbleEnabled) {
+                            bubble.show()
+                            bubble.celebrate() // grows a little each time it reads text
+                        }
                     }
                     selection = sel
                     sel.show()

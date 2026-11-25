@@ -43,6 +43,7 @@ class TractorService : AccessibilityService() {
                 NodeRead(TextMerge.collectNodes(this, Screen.bounds(this)), pkg)
             },
             takeShot = { screenshot() },
+            onClose = { Prefs.bubbleEnabled = false; refreshBubble() },
         )
         if (Prefs.bubbleEnabled) controller?.bubble?.show()
         Backend.ping()
