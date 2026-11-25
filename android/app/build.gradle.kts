@@ -21,6 +21,8 @@ android {
         versionName = cfg("VERSION_NAME", "1.0.0")
         buildConfigField("String", "SUPABASE_URL", "\"${cfg("SUPABASE_URL")}\"")
         buildConfigField("String", "SUPABASE_ANON_KEY", "\"${cfg("SUPABASE_ANON_KEY")}\"")
+        // Real phones are ARM. Dropping emulator-only x86 libraries roughly halves the APK.
+        ndk { abiFilters += listOf("arm64-v8a", "armeabi-v7a") }
         // optional = login screen with "Continue as guest"; required = must log in; off = skip login.
         buildConfigField("String", "AUTH_MODE", "\"${cfg("AUTH_MODE", "optional")}\"")
     }
